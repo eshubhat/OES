@@ -10,9 +10,9 @@ import axios from 'axios';
 // import { useHistory } from 'react-router-dom';
 
 export default function Login () {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [usernameError, setUsernameError] = useState("");
+  const [emailError, setemailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   // const [data,setData] = useState(""); 
   const navigate = useNavigate();
@@ -20,13 +20,13 @@ export default function Login () {
   // const history = useHistory(); // Initialize useHistory hook
 
   const validateForm = async (e) => {
-    // const{username,password}=req.body;
+    // const{email,password}=req.body;
     e.preventDefault();
 
-    if (username.trim() === "") {
-      setUsernameError("Username is required!");
+    if (email.trim() === "") {
+      setemailError("email is required!");
     } else {
-      setUsernameError("");
+      setemailError("");
     }
 
     if (password.trim() === "") {
@@ -37,21 +37,25 @@ export default function Login () {
 
     // Add more validation logic if needed
 
-    if (usernameError === "" && passwordError === "") {
+    if (emailError === "" && passwordError === "") {
       try {
         
-        // const  {req.body.username,req.body.password}=data;
-        console.log(username);
+        // const  {req.body.email,req.body.password}=data;
+        console.log(email);
         console.log(password);
         
-        const user = await axios.post("http://localhost:5000/api/auth/login",{
-          username,
-          password,
-          role: 'admin' 
+        axios.post("http://localhost:5000/api/auth/login",{
+          email,
+          password 
         }).then((response) => {
           console.log(response.data.message);
           if (response.data.success===true){
+            if(response.data.role === 'admin')
           navigate("/D");
+
+            else
+              localStorage.setItem('studentid',response.data.id)
+              navigate(`/studentdashboard/${response.data.id}`);
           }else{
             navigate("/login")
           }
@@ -71,9 +75,9 @@ export default function Login () {
         <h1>Login</h1>
         <form onSubmit={validateForm}>
           <div className="input-box">
-            <input type="text" id="username" placeholder="UserName" value={username} onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" id="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
             <i className="bx bxs-user"><FaUser /></i>
-            <div className="error-message">{usernameError}</div>
+            <div className="error-message">{emailError}</div>
           </div>
           <div className="input-box"><input type="password" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
             <i className="bx bxs-lock-alt"><FaLock /></i>

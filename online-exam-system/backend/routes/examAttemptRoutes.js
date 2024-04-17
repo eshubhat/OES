@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Exam = require('../models/Exam');
-const Question = require('../models/Question');
+const {Question,Test} = require('../models/Question');
 
 // POST /api/exam-attempts/:examId/submit
 router.post('/:examId/submit', async (req, res) => {
@@ -36,5 +36,18 @@ router.post('/:examId/submit', async (req, res) => {
     res.status(500).json({ message: 'Failed to submit exam', error: error.message });
   }
 });
+
+router.get('/availabletests',async(req,res)=>{
+  try {
+      
+      const TotalTests = await Test.find();
+      
+      res.status(200).json(TotalTests);
+  } catch (error) {
+      console.log("hello")
+      console.error(error);
+      res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
 
 module.exports = router;

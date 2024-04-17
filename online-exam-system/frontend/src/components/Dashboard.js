@@ -1,8 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const displayContent = (content) => {
+    if(content === 'createQuiz'){
+     navigate('/Testrelated')
+    }
     console.log(`Displaying content: ${content}`);
   };
 
@@ -25,7 +30,7 @@ const Dashboard = () => {
       <div className="sidebar" id="sidebar">
         <nav>
           <ul>
-            <li><a href="/QuizForm" onClick={() => displayContent('createQuiz')}>Create Quiz</a></li>
+            <li><a onClick={() => displayContent('createQuiz')}>Create Quiz</a></li>
             <li><a href="#" onClick={(displayContent) => displayContent('accountDetails')}>Account Details</a></li>
             <li><a href="/Login" onClick={logout}>Logout</a></li>
           </ul>

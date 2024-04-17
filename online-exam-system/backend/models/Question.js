@@ -10,5 +10,13 @@ const questionSchema = new Schema({
   marks: { type: Number, default: 1 } // Marks allocated for this question
 });
 
-module.exports = mongoose.model('Question', questionSchema);
+const testSchema = new Schema({
+  testName: {type: String, required: true, unique: true},
+  questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }]
+});
+
+const Question = mongoose.model('Question', questionSchema);
+const Test = mongoose.model('Test', testSchema);
+
+module.exports = { Question, Test };
 

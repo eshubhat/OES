@@ -18,14 +18,18 @@ router.post('/register', async (req, res) => {
 });
 
 router.post('/login', async (req, res) => {
-  const {username,password} = req.body;
-  const user = await User.findOne(req.body)
+  const {email,password} = req.body;
+  const user = await User.findOne({email})
   if (user){
+    if(user.password === password){
     res.status(200).json({
+      role:user.role,
+      id:user._id.toString(),
       success:true,
       data:{user},
       message:"user exsistes"
     })
+  }
   }else{
     res.status(404).json({
       success:false,

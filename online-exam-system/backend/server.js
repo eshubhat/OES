@@ -4,6 +4,8 @@ const dbConfig = require('./src/config/dbConfig');
 const authRoutes = require('./routes/authRoutes');
 const examRoutes = require('./routes/examRoutes');
 const examAttemptRoutes = require('./routes/examAttemptRoutes');
+const questionroute = require('./routes/questionRoutes');
+const studentroute = require('./routes/student');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -15,6 +17,9 @@ app.use(express.json()); // Use express.json() instead of bodyParser.json()
 app.use('/api/auth', authRoutes);
 app.use('/api/exams', examRoutes);
 app.use('/api/exam-attempts', examAttemptRoutes);
+app.use('/api/test',questionroute);
+app.use('/api/student',studentroute);
+
 
 // Start server
 app.listen(PORT, () => {

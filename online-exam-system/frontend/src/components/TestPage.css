@@ -1,0 +1,55 @@
+/* testPage.css */
+
+/* Container styling */
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Question styling */
+  .question {
+    margin-bottom: 20px;
+  }
+  
+  .question h2 {
+    margin-bottom: 10px;
+  }
+  
+  .question ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .question li {
+    margin-bottom: 10px;
+  }
+  
+  /* Navigation buttons styling */
+  .navigation-buttons {
+    margin-bottom: 20px;
+  }
+  
+  .navigation-buttons button {
+    margin-right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .navigation-buttons button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Submit button styling */
+  .submit-button button {
+    background-color: #28a745;
+  }
+  
+  .submit-button button:hover {
+    background-color: #218838;
+  }
+  

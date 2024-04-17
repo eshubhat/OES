@@ -1,11 +1,13 @@
 // Registration.js
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
 import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from 'axios';
 
 const Register = () => {
+  const navigate = useNavigate();
   // const [fullname, setFullname] = useState("");
   // const [email, setEmail] = useState("");
   // const [username, setUsername] = useState("");
@@ -14,7 +16,6 @@ const Register = () => {
   // const [emailError, setEmailError] = useState("");
   // const [usernameError, setUsernameError] = useState("");
   // const [passwordError, setPasswordError] = useState("");
-  const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -73,15 +74,15 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', {
+      axios.post('http://localhost:5000/api/auth/register', {
+        email,
         username,
         password,
-        role: 'admin' // Set role here as needed
+        role: 'student' // Set role here as needed
       }).then((response) => {
-        window.location.href = '/login';
+        if(!response.data.error)
+          navigate('/');
       });
-
-      console.log(response.data); // Log success message
 
       // You can redirect user to another page upon successful registration
       // Example: history.push('/login');
@@ -97,7 +98,7 @@ const Register = () => {
       <div className="wrapper">
         <h1>Registration</h1>
         <form onSubmit={validateForm}>
-          <div className="input-box">
+          {/* <div className="input-box">
             <input
               type="text"
               id="fullname"
@@ -107,7 +108,7 @@ const Register = () => {
               />
             <i className="bx bxs-user"><FaUser /></i>
           
-          </div>
+          </div> */}
           <div className="input-box">
             <input
               type="text"
@@ -149,7 +150,7 @@ const Register = () => {
         <div className="register-link">
           <p>
             Already have an account?{" "}
-            <Link to="/Login">Login</Link>
+            <Link to="/">Login</Link>
           </p>
         </div>
       </div>
