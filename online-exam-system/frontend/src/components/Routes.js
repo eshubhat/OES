@@ -8,6 +8,10 @@ import Testrelated from './Testrelated.js'
 import StudentDashboard from './Studentdashboard.js';
 import TestPage from './TestPage.js';
 import TestListPage from './TestListPage.js';
+import QuizList from './QuizHistory.js';
+import CorrectAnswersPage from './CorrectAnswerPage.js';
+import ForgotPassword from "./ResetPasswordEmail.js"
+import ForgotPasswordLink from './ResetPassword.js';
 
 const MyRoutes = () => {
     return (
@@ -20,6 +24,10 @@ const MyRoutes = () => {
             <Route path="/Testrelated" element={<Testrelated />} />
             <Route path="/testlistpage" element={<TestListPage />} />
             <Route path="/TestPage/:testid" element={<TestPage />} />
+            <Route path="/QuizHistory/:studentId" element={<QuizList />} />
+            <Route path="/correctanswerspage/:testid" element={<CorrectAnswersPage />} />
+            <Route path="/ForgotPassword" element={<ForgotPassword />} />
+            <Route path="/reset-password/:studentid" element={<ForgotPasswordLink />} />
 
         </Routes>
     );

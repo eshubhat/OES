@@ -4,6 +4,7 @@ body, html {
   padding: 0;
   font-family: Arial, sans-serif;
   height: 100%;
+  background-color: #d3d3d3;
 }
 
 /* Global styles */
@@ -11,6 +12,7 @@ body, html {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  
 }
 
 header {
@@ -23,6 +25,7 @@ header h1 {
   margin: 0;
   font-size: 24px;
   padding-left: 20px;
+  color: #333;
 }
 
 .dashboard-container {
@@ -33,6 +36,10 @@ header h1 {
 .main-content {
   flex: 1;
   padding: 20px;
+}
+
+.p1{
+  color: #333;
 }
 
 .sidebar {
@@ -61,4 +68,23 @@ header h1 {
 
 .sidebar nav ul li a:hover {
   background-color: #555;
+}
+
+/* Search bar styles */
+.search-container {
+  margin-bottom: 20px;
+}
+
+.search-container input[type="text"] {
+  width: 100%;
+  padding: 10px;
+  margin: 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.search-container input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
 }

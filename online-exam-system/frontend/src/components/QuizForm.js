@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams,useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import "./styles12.css";
 
@@ -8,6 +8,7 @@ const QuizForm = () => {
   const [choices, setChoices] = useState(['', '', '', '']);
   const [correctChoice, setCorrectChoice] = useState(null);
 
+  const navigate = useNavigate();
   const params = useParams();
   const testName = params.testname;
 
@@ -27,9 +28,6 @@ const QuizForm = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Here you can send the question, choices, and correct choice to the backend to save to the database
-    console.log('Submitting question:', { question, choices, correctChoice });
-    // Clear the form fields after submission
     setQuestion('');
     setChoices(['', '', '', '']);
     setCorrectChoice(null);
@@ -53,9 +51,21 @@ const QuizForm = () => {
   const handleFinalSubmit = () => {
     // Here you can send the final question details to the backend with a certain ID parameter to store in the database
     console.log('Finalizing question and storing in the database:', { question, choices, correctChoice });
+    if(!question &&( !choices[0] || !choices[1] || !choices[2] || !choices[3])){
+      alert("fill the fields properly")
+    }else{
+      axios.post(`http://localhost:5000/api/test/enter-question-details`,{
+      testName,
+      question,
+      choices,
+      correctChoice
+    })
+    alert('Thanks for adding the quiz questions!');
+    navigate('/D');
+    }
     // Display a thank you message for the admin
     
-    alert('Thanks for adding the quiz questions!');
+    
   };
 
   return (
@@ -78,8 +88,6 @@ const QuizForm = () => {
     <label className="correct-choice-label">Correct</label>
   </div>
 ))}
-
-        <button type="submit">Submit</button>
       </form>
 
       <button onClick={handleNextQuestion}>Next</button>

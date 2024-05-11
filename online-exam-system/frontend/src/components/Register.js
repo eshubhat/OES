@@ -1,73 +1,16 @@
 // Registration.js
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Register.css";
-import { FaUser, FaLock, FaEnvelope } from "react-icons/fa";
-import { Link } from "react-router-dom";
 import axios from 'axios';
+import React, { useState } from "react";
+import { FaEnvelope, FaLock, FaUser } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
+import "./Register.css";
 
 const Register = () => {
   const navigate = useNavigate();
-  // const [fullname, setFullname] = useState("");
-  // const [email, setEmail] = useState("");
-  // const [username, setUsername] = useState("");
-  // const [password, setPassword] = useState("");
-  // const [fullnameError, setFullnameError] = useState("");
-  // const [emailError, setEmailError] = useState("");
-  // const [usernameError, setUsernameError] = useState("");
-  // const [passwordError, setPasswordError] = useState("");
+
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
-// const validateForm = (e) => {
-//     e.preventDefault();
-
-  //   if (fullname.trim() === "") {
-  //     setFullnameError("Full name is required!");
-  //   } else {
-  //     setFullnameError("");
-  //   }
-
-  //   if (email.trim() === "") {
-  //     setEmailError("Email is required!");
-  //   } else {
-  //     setEmailError("");
-  //   }
-
-  //   if (username.trim() === "") {
-  //     setUsernameError("Username is required!");
-  //   } else {
-  //     setUsernameError("");
-  //   }
-
-  //   if (password.trim() === "") {
-  //     setPasswordError("Password is required!");
-  //   } else {
-  //     setPasswordError("");
-  //   }
-
-  //   // Add more validation logic if needed
-
-  //   if (
-  //     fullnameError === "" &&
-  //     emailError === "" &&
-  //     usernameError === "" &&
-  //     passwordError === ""
-  //   ) {
-  //     // Continue with form submission or other actions
-  //     console.log(
-  //       "Submitting form with fullname:",
-  //       fullname,
-  //       "email:",
-  //       email,
-  //       "username:",
-  //       username,
-  //       "and password:",
-  //       password
-  //     );
-  //   }
-  // };
 
 
   const validateForm = async (e) => {
@@ -81,6 +24,7 @@ const Register = () => {
         role: 'student' // Set role here as needed
       }).then((response) => {
         if(!response.data.error)
+          alert("Registered successfully!");
           navigate('/');
       });
 
@@ -94,7 +38,7 @@ const Register = () => {
 
 
   return (
-    <div className="body">
+    <div className="Register">
       <div className="wrapper">
         <h1>Registration</h1>
         <form onSubmit={validateForm}>

@@ -19,18 +19,28 @@ const {Question,Test} = require('../models/Question');
 
 router.post('/create-test', async (req, res) => {
   try {
-    const { testName } = req.body;
-
+    const { testName,testTime,subject } = req.body;
+    const search = await Test.findOne({testName}) 
+    console.log(search);
+    if(search){
+      return res.status(200).json({message:"There already exits a test on this name!"})
+    }
     // Create a new test document
-    const newTest = new Test({ testName });
+    const newTest = new Test({ testName,testTime,subject });
+
+    
 
     // Save the new test to the database
+    
     await newTest.save();
+      
+    
 
     // Respond with the ID of the created test
     res.status(201).json({ testId: newTest._id });
   } catch (err) {
     console.error(err);
+    
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });

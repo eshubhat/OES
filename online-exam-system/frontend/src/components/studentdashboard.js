@@ -15,12 +15,16 @@ const navigate = useNavigate()
   // Fetch student information and quiz history when component mounts
   useEffect(() => {
     fetchStudentInfo();
-    fetchQuizHistory();
+    // fetchQuizHistory();
   }, []);
 
   const fetchStudentInfo = () => {
     // Fetch student information from the backend and update state
     // Example:
+    if(!params.id){
+      alert("Please login first/Register your self!");
+      navigate("/");
+    }
     console.log(params.id)
     axios.get(`http://localhost:5000/api/student/${params.id}`)
       .then((response) => {
@@ -36,32 +40,16 @@ const navigate = useNavigate()
   };
 
   const fetchQuizHistory = () => {
-    // Fetch quiz history from the backend and update state
-    // Example:
-    // fetch('/api/student/quiz/history')
-    //   .then(response => response.json())
-    //   .then(data => setQuizHistory(data))
-    //   .catch(error => console.error('Error fetching quiz history:', error));
 
-    axios.get(`http://localhost:5000/api/student/tests/${params.id}`)
-      .then((response) => {
-       
-        console.log(response.data.details);
-        setQuizHistory(response.data.details.tests);
-        setQuizScore(response.data.details.score)
-        localStorage.setItem('studentid',params.id);
-      })
-      .catch(error => console.error('Error fetching student info:', error));
+    navigate(`/quizHistory/${localStorage.getItem('studentid')}`);
   };
 
   const startQuiz = () => {
-    // Implement quiz logic here (e.g., redirect to quiz page)
     alert('Starting Quiz...');
     navigate('/testlistpage');
   };
 
   const logout = () => {
-    // Implement logout logic here (e.g., redirect to logout endpoint)
     alert('Logging out...');
     localStorage.removeItem('studentid');
     navigate('/');
@@ -71,7 +59,6 @@ const navigate = useNavigate()
     <div className="container">
       <h1>Welcome, Student!</h1>
 
-      {/* Navigation */}
       <nav>
         <ul>
           <li>
@@ -80,10 +67,10 @@ const navigate = useNavigate()
             </a>
           </li>
           <li>
-            <a href="#" className="nav-link" onClick={fetchQuizHistory}>
-              Quiz History
-            </a>
-          </li>
+  <button className="nav-link" onClick={fetchQuizHistory}>
+    Quiz Analysis
+  </button>
+</li>
         </ul>
       </nav>
 
@@ -101,21 +88,20 @@ const navigate = useNavigate()
           </div>
         )}
 
-        {/* Display Quiz History */}
         {quizHistory && (
           <div className="info-section">
-            <h2>Quiz History</h2>
+            <h2>Quiz Analysis</h2>
             <ul>
               {quizHistory.map((quiz, index) => (
                 <li key={index}>
                   <p><strong>Quiz Name:</strong> {quiz.testName}</p>
-                  {/* Add more details as needed */}
+
                 </li>
               ))}
               {quizScore.map((quiz, index) => (
                 <li key={index}>
                   <p><strong>Score:</strong> {quiz.score}</p>
-                  {/* Add more details as needed */}
+
                 </li>
               ))}
             </ul>

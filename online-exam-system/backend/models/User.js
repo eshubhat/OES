@@ -10,7 +10,14 @@ const userSchema = new Schema({
   email: { type: String, required: true, unique: true },
   role: { type: String, enum: ['admin', 'student'], required: true },
   tests: [{ type: Schema.Types.ObjectId, ref: 'Test' }],
-  score:[{type:Number}]
+  score: [
+    {
+      test: { type: Schema.Types.ObjectId, ref: 'Test',required: true },
+      score: { type: Number, required: true }
+    }
+  ]
 });
 
-module.exports = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema);
+
+module.exports = {User};

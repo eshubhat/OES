@@ -5,17 +5,18 @@
   padding: 0;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif;
-}   
+}  
 
-body {
+.Login {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background:url('img7.jpg') no-repeat;
+    min-height: 100;
+    background-image:url('./img7.jpg');
     background-size: cover;
     background-position: center;
 }
+
 
 .wrapper{
     width: 420px;

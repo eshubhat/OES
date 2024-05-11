@@ -1,0 +1,43 @@
+.quiz-list-container {
+  text-align: left;
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+.average-scores-container {
+  text-align: center;
+  margin-top: 120px;
+}
+
+.tables-container {
+  display: flex;
+  margin-top: 20px;
+}
+
+.quiz-table,
+.average-score-table {
+  width: 50%;
+  border-collapse: collapse;
+}
+
+.quizHistoryHeader {
+  margin-bottom: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
+}

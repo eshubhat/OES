@@ -1,0 +1,24 @@
+/* Add styles for student list */
+.main-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  li {
+    margin-bottom: 10px;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  li:hover {
+    background-color: #f0f0f0;
+    cursor: pointer;
+  }
+  

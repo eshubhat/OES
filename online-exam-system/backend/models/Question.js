@@ -3,6 +3,10 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+const subjectSchema = new Schema({
+  subject_Name: {type:String,requried: true}
+});
+
 const questionSchema = new Schema({
   text: { type: String, required: true },
   options: [{ type: String, required: true }],
@@ -12,11 +16,14 @@ const questionSchema = new Schema({
 
 const testSchema = new Schema({
   testName: {type: String, required: true, unique: true},
-  questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }]
+  testTime: {type: Number,required: true},
+  questions: [{ type: Schema.Types.ObjectId, ref: 'Question' }],
+  subject: {type: String, required: true }
 });
 
 const Question = mongoose.model('Question', questionSchema);
 const Test = mongoose.model('Test', testSchema);
+const Subject = mongoose.model('Subject',subjectSchema);
 
 module.exports = { Question, Test };
 

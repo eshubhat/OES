@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
-// import data from '../../backend/data';
 import "./Login.css";
+
 import { FaUser, FaLock } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import axios from 'axios';
-// import  loginUser  from '../../../backend/src/config/data';
-//import axios from 'axios';
-// import { useHistory } from 'react-router-dom';
+
 
 export default function Login () {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setemailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  // const [data,setData] = useState(""); 
   const navigate = useNavigate();
 
-  // const history = useHistory(); // Initialize useHistory hook
-
   const validateForm = async (e) => {
-    // const{email,password}=req.body;
     e.preventDefault();
 
     if (email.trim() === "") {
@@ -35,32 +29,25 @@ export default function Login () {
       setPasswordError("");
     }
 
-    // Add more validation logic if needed
-
     if (emailError === "" && passwordError === "") {
       try {
-        
-        // const  {req.body.email,req.body.password}=data;
-        console.log(email);
-        console.log(password);
-        
         axios.post("http://localhost:5000/api/auth/login",{
           email,
-          password 
+          password
         }).then((response) => {
-          console.log(response.data.message);
           if (response.data.success===true){
-            if(response.data.role === 'admin')
-          navigate("/D");
-
-            else
+            alert("Logging in...");
+            if(response.data.role === 'admin'){
+              navigate("/D");
+              localStorage.setItem('adminid',response.data.id)
+            } else {
               localStorage.setItem('studentid',response.data.id)
               navigate(`/studentdashboard/${response.data.id}`);
-          }else{
-            navigate("/login")
+            }
           }
         }).catch((e)=>{
-          console.log(e);
+          alert("User data not found in database");
+          navigate("/register");
         })
        
       } catch(error) {
@@ -70,7 +57,7 @@ export default function Login () {
   };
 
   return (
-    <div className="body">
+    <div className="Login" >
       <div className="wrapper">
         <h1>Login</h1>
         <form onSubmit={validateForm}>
@@ -88,8 +75,6 @@ export default function Login () {
             <label>
               <input type="checkbox" />Remember Me
             </label>
-
-            {/* Replace anchor tag with Link component */}
             <Link to="/ForgotPassword">Forgot Password</Link>
           </div>
 
